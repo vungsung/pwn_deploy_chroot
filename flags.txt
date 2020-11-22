@@ -1,0 +1,2 @@
+{"flag": "flag{aaaaa}", "port": 10000, "filename": "ret2libc"}
+{"flag": "flag{bbbbb}", "port": 10001, "filename": "ret2text"}
