@@ -61,7 +61,7 @@ def generateFlags(filelist):
             flag_dict["filename"] = filename
             flag_dict["flag"] = tmp_flag
             flag_json = json.dumps(flag_dict)
-            print flag_json
+            print(flag_json)
             f.write(flag_json + "\n")
             flags.append(tmp_flag)
     return flags
@@ -91,7 +91,7 @@ def generateDockerfile(filelist, flags):
     for filename in filelist:
         runcmd += "useradd -m " + filename + " && "
    
-    for x in xrange(0, len(filelist)):
+    for x in range(0, len(filelist)):
         if x == len(filelist) - 1:
             runcmd += "echo '" + flags[x] + "' > /home/" + filelist[x] + "/flag.txt" 
         else:
@@ -111,7 +111,7 @@ def generateDockerfile(filelist, flags):
 
     # chown & chmod
     chown_chmod = "RUN "
-    for x in xrange(0, len(filelist)):
+    for x in range(0, len(filelist)):
         chown_chmod += "chown -R root:" + filelist[x] + " /home/" + filelist[x] + " && "
         chown_chmod += "chmod -R 750 /home/" + filelist[x] + " && "
         if x == len(filelist) - 1:
@@ -127,7 +127,7 @@ def generateDockerfile(filelist, flags):
         # ness_bin = '''mkdir /home/%s/bin && cp /bin/sh /home/%s/bin && cp /bin/ls /home/%s/bin && cp /bin/cat /home/%s/bin'''
         ness_bin = '''&& cp /bin/sh /home/%s/bin && cp /bin/ls /home/%s/bin && cp /bin/cat /home/%s/bin'''
     copy_lib_bin_dev = "RUN "
-    for x in xrange(0, len(filelist)):
+    for x in range(0, len(filelist)):
         copy_lib_bin_dev += "cp -R /lib* /home/" + filelist[x]  + " && "
         copy_lib_bin_dev += "cp -R /usr/lib* /home/" + filelist[x]  + " && "
         copy_lib_bin_dev += dev % (filelist[x], filelist[x], filelist[x], filelist[x], filelist[x], filelist[x])
@@ -152,7 +152,7 @@ def generateDockerCompose(length):
     conf = ""
     ports = ""
     port = PORT_LISTEN_START_FROM
-    for x in xrange(0,length):
+    for x in range(0,length):
         ports += "- " + str(port) + ":" + str(port) + "\n    "
         port = port + 1
 
